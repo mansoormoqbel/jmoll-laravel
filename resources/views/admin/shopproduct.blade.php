@@ -29,52 +29,9 @@
                     <div class="container px-4 px-lg-5 mt-5">
                         <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
 
-                            @foreach ($shops as $shop)
-                                <div class="col mb-5">
-                                    <div class="card ">
-                                        <div class="card-header "> {{$shop->name}} </div>
-                                        <div class="card-body p-4">
-                                            <div style="font-size: 7px"> {{$shop->address}} </div>
-                                            <h5 class="text-header">owner shop : {{$shop->user->username}} </h5>
-                                            <a href="{{route('admin.shopcart.ShowProducts',$shop->id)}}" class="btn btn-danger" > Show Product </a>
-                                        </div>
-                                    </div>
-                                </div>
+                           
 
-                            @endforeach
-{{-- 
-                                "id": 1,
-    "name": "test shop",
-    "Field": "test shop",
-    "latitude": "31.93189802",
-    "longitude": "35.94391088",
-    "city": "Amman",
-    "address": "Abu Obaidah Al-Thaqafi Street, العوده, منطقة اليرموك, Amman, Amman Sub-District, Amman Qasabah District, Amman, 11152, Jordan",
-    "phone_number": "0788865214",
-    "acception": 1,
-    "created_date": "2024-09-04 00:00:00",
-    "seller_id": 3,
-    "catg_id": 1,
-    "created_at": "2024-09-04T12:51:21.000000Z",
-    "updated_at": "2024-09-04T12:51:21.000000Z",
-    "user": {
-      "id": 3,
-      "username": "test",
-      "first_name": "mansoor",
-      "last_name": "moqbel",
-      "phone_number": "0788865214",
-      "profile_photo": "1725453929.png",
-      "status": 1,
-      "type_user": 2,
-      "email": "test@gmail.com",
-      "email_verified_at": null,
-      "created_at": "2024-09-04T12:45:30.000000Z",
-      "updated_at": "2024-09-10T18:29:52.000000Z"
-    }
-
-
---}}
-                            {{-- 
+                             
                                 @foreach ($products as $product)
                                     <div class="col mb-5">
                                         <div class="card h-100">
@@ -118,7 +75,7 @@
                                         </div>
                                     </div>
                                 @endforeach
-                            --}}
+                            
 
                             
                             

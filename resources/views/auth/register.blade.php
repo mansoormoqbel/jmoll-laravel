@@ -80,7 +80,25 @@
                                 @enderror
                             </div>
                         </div>
-                        
+                        {{-- type User --}}
+                        <div class="row mb-3">
+                            <label for="username" class="col-md-4 col-form-label text-md-end">{{ __('User Name') }}</label>
+
+                            <div class="col-md-6">
+                                <select class="form-select" name="TypeUser" aria-label="Default select example">
+                                    <option selected>Open this select menu</option>
+                                    <option value="0">User</option>
+                                    <option value="1">Driver</option>
+                                    <option value="2">Seller</option>
+                                </select>
+
+                                @error('username')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
 
                         {{-- Email --}}
                         <div class="row mb-3">

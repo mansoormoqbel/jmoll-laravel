@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\ShoppingCart;
+
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -64,6 +66,7 @@ class RegisterController  extends \Illuminate\Routing\Controller
             'profile_photo' => [ 'required','image','mimes:jpeg,png,jpg,gif,svg' ,'max:2048'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'TypeUser'=>['required'],
         ]);/* '' */
     }
 
@@ -83,14 +86,8 @@ class RegisterController  extends \Illuminate\Routing\Controller
             $imageName = time() . '.' . $image->extension();
             $image->move(public_path('images'), $imageName);
         }
-        /* if ($data->has('profile_photo')) {
-            $image=$request->file('profile_photo');
-            
-            $imageName=time().'.'.$image->extension();
-            $image->move(public_path('images'),$imageName);
-
-        } */
-        return User::create([
+        
+        $user= User::create([
 
             'username' => $data['username'],
             'first_name' => $data['first_name'],
@@ -98,9 +95,14 @@ class RegisterController  extends \Illuminate\Routing\Controller
             'phone_number' => $data['phone_number'],
             'profile_photo' => $imageName,
             'status' => true,
-            'type_user' => 0,
+            'type_user' => $data['TypeUser'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+        return ShoppingCart::create([
+            'user_id '=>$user->id,
+            'name'=> $user->username,
+        ]);
+           
     }
 }

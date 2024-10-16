@@ -11,6 +11,7 @@ use App\Models\CartItem;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Comments;
+use App\Models\Shop;
 use App\Models\ShoppingCart;
 use Illuminate\Support\Facades\Validator;
 
@@ -18,16 +19,28 @@ use Carbon\Carbon;
 class ShoppingCartController extends Controller
 {
     public function index() {
-        $products =Product::with('shop','category','productphoto')->get();
+        $shops=Shop::with('user')->get();
+       
+        
+        
+        
+        /* return $products; */
+        return view('admin.shop',compact('shops')); 
+    }
+    public function ShowProducts($id)  {
+        $products =Product::with('shop','category','productphoto')->where('shop_id',$id)->get();
+        
         $user= Auth::user()->with('shoppingCart')->first();
             $x = $user->shoppingCart; 
             $cart_id=$x->id;
+
+
         $aa=CartItem::where('cart_id',$cart_id)->get();
         $q=$aa->count();
         session(['count' => $q]);
-        /* return $products; */
-        return view('admin.shop',compact('products')); 
+        return view('admin.shopproduct',compact('products')); 
     }
+
     public function AddToCart(Request $request){
         try {
             $qw= CartItem::where('product_id',$request->Product_id)->first();

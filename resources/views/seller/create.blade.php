@@ -1,5 +1,5 @@
 
-@extends('layouts.admin')
+@extends('layouts.seller')
 
 @section('content')
 <div class="container">

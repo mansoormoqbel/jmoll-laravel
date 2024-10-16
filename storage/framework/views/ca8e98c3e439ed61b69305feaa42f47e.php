@@ -316,7 +316,7 @@
     <script src="<?php echo e(asset('asset/js/sb-admin-2.min.js')); ?>"></script>
       
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-
+    <?php echo $__env->yieldContent('script'); ?>
 </body>
 </html>
 <?php /**PATH C:\xampp\htdocs\ecom-app1\resources\views/layouts/seller.blade.php ENDPATH**/ ?>

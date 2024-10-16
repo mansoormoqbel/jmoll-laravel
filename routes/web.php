@@ -13,7 +13,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/logout', [App\Http\Controllers\HomeController::class, 'logout'])->name('logout');
+Route::get('/logout', [App\Http\Controllers\HomeController::class, 'logout'])->name('a.logout');
 
 /* Start admin  */
 
@@ -134,6 +134,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
         Route::get('/',  'index')->name('admin.shopcart.index');
         Route::post('/AddToCart',  'AddToCart')->name('admin.shopcart.AddToCart');
         Route::get('/show/{id}',  'show')->name('admin.shopcart.show');
+        Route::get('/ShowProducts/{id}',  'ShowProducts')->name('admin.shopcart.ShowProducts');
         Route::get('/showCart',  'showCart')->name('admin.shopcart.showCart');
         Route::post('/addcomment',  'addcomment')->name('admin.shopcart.addcomment');
         Route::delete('/destroy/{id}','DeleteCartItem')->name('admin.shopcart.DeleteCartItem');
@@ -150,12 +151,35 @@ Route::prefix('admin')->middleware('auth')->group(function () {
 Route::prefix('driver')->middleware('auth')->group(function () {
     Route::get('/dashboard', [App\Http\Controllers\Driver\DashboardController::class, 'index'])->name('driver.dashboard');
     Route::get('/logout', [App\Http\Controllers\Driver\DashboardController::class, 'logout'])->name('driver.logout');
+    Route::prefix('order')->controller(App\Http\Controllers\Driver\OrderController::class)->group(function () {
+       Route::get('/','index')->name('driver.order');
+       Route::get('/getOrder/{id}','getOrder')->name('driver.getOrder');
+       
+        
+       
+    });
 });
 Route::prefix('seller')->middleware('auth')->group(function () {
     Route::get('/dashboard', [App\Http\Controllers\Seller\DashboardController::class, 'index'])->name('seller.dashboard');
     Route::get('/logout', [App\Http\Controllers\Seller\DashboardController::class, 'logout'])->name('seller.logout');
     Route::get('/create', [App\Http\Controllers\Seller\DashboardController::class, 'create'])->name('seller.create');
     Route::post('/store', [App\Http\Controllers\Seller\DashboardController::class, 'store'])->name('seller.store');
+
     Route::get('/showShop/{id}', [App\Http\Controllers\Seller\DashboardController::class, 'showShop'])->name('seller.showShop');
+    
+    Route::get('/product/{id}', [App\Http\Controllers\Seller\DashboardController::class, 'product'])->name('seller.product');
+    Route::get('/createproduct/{id}',  [App\Http\Controllers\Seller\DashboardController::class, 'createproduct'])->name('seller.createproduct');
+    Route::post('/storeproduct', [App\Http\Controllers\Seller\DashboardController::class, 'storeproduct'])->name('seller.storeproduct');
+    Route::delete('/destroy/{id}',[App\Http\Controllers\Seller\DashboardController::class, 'destroy'])->name('seller.destroy');
+    Route::get('/TakenByDriver/{id}',  [App\Http\Controllers\Seller\DashboardController::class, 'TakenByDriver'])->name('seller.TakenByDriver');
+    Route::get('/WithOutDriver/{id}',  [App\Http\Controllers\Seller\DashboardController::class, 'WithOutDriver'])->name('seller.WithOutDriver');
+    Route::get('/OrderDone/{id}',  [App\Http\Controllers\Seller\DashboardController::class, 'OrderDone'])->name('seller.OrderDone');
+    
+    Route::get('/GetProduct/{id}',  [App\Http\Controllers\Seller\DashboardController::class, 'GetProduct'])->name('seller.GetProduct');
+    Route::get('/OrderStatus/{id}', [App\Http\Controllers\Seller\DashboardController::class, 'OrderStatus'])->name('seller.OrderStatus');
+    Route::post('/editDriver', [App\Http\Controllers\Seller\DashboardController::class, 'editDriver'])->name('seller.editDriver');
+    
+    
+    
 });
 

@@ -30,50 +30,21 @@
                 <section class="py-5">
                     <div class="container px-4 px-lg-5 mt-5">
                         <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-                            <?php $__currentLoopData = $products; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+
+                            <?php $__currentLoopData = $shops; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $shop): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <div class="col mb-5">
-                                    <div class="card h-100">
-                                        <!-- Product image-->
-                                        <img class="card-img-top" src="<?php echo e(asset('Product/'.$product->productphoto[0]->photo_name)); ?>" alt="..." />
-                                        <!-- Product details-->
+                                    <div class="card ">
+                                        <div class="card-header "> <?php echo e($shop->name); ?> </div>
                                         <div class="card-body p-4">
-                                            <div class="text-center">
-                                                <!-- Product name-->
-                                                <h5 class="fw-bolder"> <?php echo e($product->name); ?> </h5>
-                                                <!-- Product price-->
-                                            <?php echo e($product->price); ?>
-
-                                            </div>
-                                        </div>
-                                        <form action="<?php echo e(route('admin.shopcart.AddToCart')); ?>" method="post">
-                                            <?php echo csrf_field(); ?>
-                                            <div class="row">
-                                                <div class=" form-control-sm">
-                                                    <input type="hidden" name="Product_id" value="<?php echo e($product->id); ?>">
-                                                    <input type="number" name="qun" id="qun" min="1" required>
-                                                </div>
-                                            </div>
-                                        
-                                            
-                                            <div class="card-footer p-1 pt-0 border-top-0 bg-transparent">
-                                                <div class="text-center">
-                                                    <button type="submit" class="btn btn-outline-dark mt-auto">
-                                                        <i class="fas fa-fw fa-shopping-cart"></i>
-                                                    </button>
-                                                
-                                                    <a class="btn btn-outline-dark mt-auto" href="<?php echo e(route('admin.shopcart.show',$product->id)); ?>"><i class="fas fa-fw fa-share"></i></a>
-                                                </div>
-                                            </div>
-
-                                        </form>
-                                        <!-- Product actions-->
-                                        
-                                        <div class="card-footer p-1 pt-0 border-top-0 bg-transparent">
-                                            
+                                            <div style="font-size: 7px"> <?php echo e($shop->address); ?> </div>
+                                            <h5 class="text-header">owner shop : <?php echo e($shop->user->username); ?> </h5>
+                                            <a href="<?php echo e(route('admin.shopcart.ShowProducts',$shop->id)); ?>" class="btn btn-danger" > Show Product </a>
                                         </div>
                                     </div>
                                 </div>
+
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
                             
 
                             

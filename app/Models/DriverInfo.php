@@ -21,6 +21,6 @@ class DriverInfo extends Model
     }
     public function order(): HasMany
     {
-        return $this->hasMany(Order::class);
+        return $this->hasMany(Order::class,'driver_id');
     }
 }
